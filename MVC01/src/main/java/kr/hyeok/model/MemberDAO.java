@@ -58,7 +58,7 @@ public class MemberDAO extends MemberVO {
 
 	// 회원(VO) 전체 리스트(ArrayList) 가져오기
 	public ArrayList<MemberVO> memberList() {
-		String sql = "select * from member order by no";
+		String sql = "select * from member";
 		getConnect();
 		ArrayList<MemberVO> list = new ArrayList<>();
 
@@ -83,6 +83,53 @@ public class MemberDAO extends MemberVO {
 			close();
 		}
 		return list;
+	}
+
+	public int memberDelete(int num) {
+		String sql = "delete from member where num = ?";
+		getConnect();
+		int rows = 0;
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			rows = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return rows;
+	}
+
+	public MemberVO memberContent(int num) {
+		String sql = "select * from member where num = ?";
+		getConnect();
+		MemberVO vo = null;
+
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				// 회원 한명의 정보를 가져와서 ->묶고(VO)
+				num = rs.getInt("num");
+				String id = rs.getString("pass");
+				String pass = rs.getString("pass");
+				String name = rs.getString("name");
+				int age = rs.getInt("age");
+				String email = rs.getString("email");
+				String phone = rs.getString("phone");
+				vo = new MemberVO(num, id, pass, name, age, email, phone);
+
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return vo;
 	}
 
 	// 데이터베이스 연결 끊기

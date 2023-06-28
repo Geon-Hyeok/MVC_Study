@@ -45,8 +45,9 @@ public class MemberInsertController extends HttpServlet {
 		int rows = dao.memberInsert(vo);
 		PrintWriter out = response.getWriter();
 		if (rows > 0) {
-			// 가입성공
-			out.println("insert sucess");
+			// 가입성공 -> // 다시 회원리스트 보기로 이동(/MVC01/memberList.do)
+			response.sendRedirect("/MVC01/memberList.do");
+			// out.println("insert sucess");
 		} else {
 			// 가입실패 -> 예외객체를 만들어서 WAS에게 던짐
 			throw new ServletException("not insert");
