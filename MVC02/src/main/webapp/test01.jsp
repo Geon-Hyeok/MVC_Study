@@ -17,6 +17,9 @@ int sum = 0;
 for (int i = 1; i <= 100; i++) {
 	sum += i;
 }
+
+// request, response : JSP의 내장객체(이미 만들어진 객체) 
+
 %>
 <!DOCTYPE html>
 <html>
