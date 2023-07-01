@@ -1,7 +1,7 @@
-<%@page import="java.util.ArrayList"%>
-<%@page import="kr.hyeok.model.*"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page import="kr.hyeok.model.*"%>
+<%@ page import="java.util.*"%>
 <%
 MemberDAO dao = new MemberDAO();
 ArrayList<MemberVO> list = dao.memberList();
@@ -12,43 +12,52 @@ ArrayList<MemberVO> list = dao.memberList();
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
-
 <link rel='stylesheet'
 	href='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css'>
-
 <script
 	src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
 <script
 	src='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js'></script>
+<script type="text/javascript">
+  function deleteFn(num){
+  location.href="memberDelete.jsp?num="+num; // ?num=12
+  }
+</script>
 </head>
 <body>
-
 	<table class="table table-bordered">
 		<tr>
-			<td>¹øÈ£</td>
-			<td>¾ÆÀÌµğ</td>
-			<td>ºñ¹Ğ¹øÈ£</td>
-			<td>ÀÌ¸§</td>
-			<td>³ªÀÌ</td>
-			<td>ÀÌ¸ŞÀÏ</td>
-			<td>ÀüÈ­¹øÈ£</td>
+			<td>ë²ˆí˜¸</td>
+			<td>ì•„ì´ë””</td>
+			<td>ë¹„ë°€ë²ˆí˜¸</td>
+			<td>ì´ë¦„</td>
+			<td>ë‚˜ì´</td>
+			<td>ì´ë©”ì¼</td>
+			<td>ì „í™”ë²ˆí˜¸</td>
+			<td>ì‚­ì œ</td>
 		</tr>
 		<%
 		for (MemberVO vo : list) {
 		%>
 		<tr>
 			<td><%=vo.getNum()%></td>
-			<td><%=vo.getId()%></td>
+			<td><a href="memberContent.jsp?num=<%=vo.getNum()%>"><%=vo.getId()%></a></td>
 			<td><%=vo.getPass()%></td>
 			<td><%=vo.getName()%></td>
 			<td><%=vo.getAge()%></td>
 			<td><%=vo.getEmail()%></td>
 			<td><%=vo.getPhone()%></td>
+			<td><input type="button" value="ì‚­ì œ" class="btn btn-warning"
+				onclick="deleteFn(<%=vo.getNum()%>)"></td>
 		</tr>
 		<%
 		}
 		%>
+		<tr>
+			<td colspan="8" align="right"><input type="button" value="íšŒì›ê°€ì…"
+				class="btn btn-primary"
+				onclick="location.href='memberRegister.html'" /></td>
+		</tr>
 	</table>
-
 </body>
 </html>
