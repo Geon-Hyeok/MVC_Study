@@ -132,6 +132,25 @@ public class MemberDAO extends MemberVO {
 		return vo;
 	}
 
+	public int memberUpdate(MemberVO vo) {
+		String SQL = "update member set age=?, email=?, phone=? where num=?";
+		getConnect();
+		int rows = 0;
+		try {
+			pstmt = con.prepareStatement(SQL);
+			pstmt.setInt(1, vo.getAge());
+			pstmt.setString(2, vo.getEmail());
+			pstmt.setString(3, vo.getPhone());
+			pstmt.setInt(4, vo.getNum());
+			rows = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return rows;
+	}
+
 	// 데이터베이스 연결 끊기
 	public void close() {
 		try {
