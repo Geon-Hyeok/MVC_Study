@@ -10,9 +10,9 @@ import xyz.itwill.dto.UserinfoDTO;
 import xyz.itwill.exception.ExistsUserinfoException;
 import xyz.itwill.service.UserinfoService;
 
-// 클라이언트가 [/write.do]로 요청한 경우 객체로 생성될 모델 역활의 클래스
+//클라이언트가 [/write.do]로 요청한 경우 객체로 생성될 모델 역활의 클래스
 // => 회원정보를 전달받아 USERINFO 테이블에 회원정보로 삽입하고 [/loginform.do]로 
-// 리다이렉트 이동하기 위한 정보가 저장된 ActionForward 객체 반환
+//리다이렉트 이동하기 위한 정보가 저장된 ActionForward 객체 반환
 public class WriteModel implements Action {
 
 	@Override
@@ -25,7 +25,7 @@ public class WriteModel implements Action {
 				throw new Exception();
 			}
 
-			request.setCharacterEncoding("utf-8");
+			// request.setCharacterEncoding("utf-8");
 
 			String userid = request.getParameter("userid");
 			String password = request.getParameter("password");
